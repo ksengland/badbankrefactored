@@ -4,9 +4,9 @@ import { UserContext } from "./context";
 function AllData() {
   const ctx = React.useContext(UserContext);
 
-  const userData = ctx.users.map((user) => {
+  const displayUsers = ctx.users.map((user) => {
     return (
-      <tr>
+      <tr key={user}>
         <td>{user.name}</td>
         <td>{user.email}</td>
         <td>{user.password}</td>
@@ -17,7 +17,7 @@ function AllData() {
 
   return (
     <div>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Name</th>
@@ -26,7 +26,7 @@ function AllData() {
             <th>Balance</th>
           </tr>
         </thead>
-        <tbody>{userData}</tbody>
+        <tbody>{displayUsers}</tbody>
       </table>
     </div>
   );

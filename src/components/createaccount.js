@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./context";
 import { UserContext } from "./context";
-import { useState } from "react";
+//import { useState } from "react";
 
 function CreateAccount() {
   const [show, setShow] = React.useState(true);
@@ -9,18 +9,17 @@ function CreateAccount() {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+
   const ctx = React.useContext(UserContext);
 
   function validate(field, label) {
     if (!field) {
-      setStatus('"Error: invalid ${label}');
+      setStatus("Error: invalid ${label}");
       setTimeout(() => setStatus(""), 3000);
       return false;
     }
     return true;
   }
-
-  //TODO: validate password length
 
   function handleCreate() {
     console.log(name, email, password);
@@ -28,6 +27,7 @@ function CreateAccount() {
     if (!validate(email, "email")) return;
     if (!validate(password, "password")) return;
     ctx.users.push({ name, email, password, balance: 100 });
+    console.log(ctx);
     setShow(false);
   }
 
