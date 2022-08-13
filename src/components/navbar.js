@@ -10,9 +10,7 @@ function NavBar() {
   };
   return (
     <nav className="navbar navbar-expand navbar-light bg-light">
-      <NavLink className="navbar-brand" to="/">
-        BadBank
-      </NavLink>
+      <h4>BadBank</h4>
       <div className="navbar-collapse">
         <ul className="navbar-nav">
           <li
