@@ -5,34 +5,41 @@ import { useContext } from "react";
 import { useState } from "react";
 
 function Withdraw() {
+  const [withdraw, setWithdraw] = React.useState("");
+  const [balance, setBalance] = React.useState(0);
   const [show, setShow] = React.useState(true);
   const [status, setStatus] = React.useState("");
-  const [withdraw, setWithdraw] = React.useState("");
-  const [balance, setBalance] = React.useState([]);
   const ctx = React.useContext(UserContext);
-  let userBalance = JSON.stringify(ctx.users[ctx.users.length - 1].balance);
+  let userBalance = ctx.users[ctx.users.length - 1].balance;
+  let userName = ctx.users[ctx.users.length - 1].name;
 
   function validate(number) {
-    if (isNaN(number)) {
-      setStatus("Error: Please enter a valid number");
-      setTimeout(() => setStatus(""), 3000);
+    if (isNaN(number) || number < 0) {
+      //alert("Error: Please enter a valid number");
+      setStatus(
+        "Your withdrawal could not be completed. Please enter a valid, positive number."
+      );
       return false;
     }
     return true;
   }
 
-  /* function overdraw(number){
-    if(Number(number) > userBalance){
-      setStatus('Withdrawal amount cannot be greater than your current balance')
+  function overdraw(number) {
+    if (Number(number) > userBalance) {
+      setStatus(
+        "Your withdrawal could not be completed. Withdrawal amount cannot be greater than your current balance."
+      );
       clearForm();
-      return false
+      return false;
     }
     return true;
-  } */
+  }
 
   function handleWithdrawal(amount) {
-    if (!validate(amount)) return;
+    if (!validate(amount) || !overdraw(amount)) return;
     setBalance(userBalance - amount);
+    setStatus("");
+
     ctx.users[ctx.users.length - 1].balance -= Number(amount);
     setShow(false);
   }
@@ -44,13 +51,15 @@ function Withdraw() {
 
   return (
     <Card
-      bgcolor="primary"
+      bgcolor="light"
+      txtcolor="dark"
       header="Make a Withdrawal"
       status={status}
       body={
         show ? (
           <>
-            Current Balance: ${userBalance}
+            <h2>Welcome, {userName}!</h2>
+            <h3>Current Balance: $ {userBalance}</h3>
             <br />
             <br />
             Amount
@@ -66,8 +75,9 @@ function Withdraw() {
             <br />
             <button
               type="submit"
-              className="btn btn-light"
-              onClick={handleWithdrawal}
+              className="btn btn-outline-dark"
+              disabled={withdraw === ""}
+              onClick={() => handleWithdrawal(withdraw)}
             >
               Withdraw Amount
             </button>
@@ -75,7 +85,7 @@ function Withdraw() {
         ) : (
           <>
             <h5>Success!</h5>
-            <button type="submit" className="btn btn-light" onClick={clearForm}>
+            <button type="submit" className="btn btn-dark" onClick={clearForm}>
               Make Another Withdrawal
             </button>
           </>

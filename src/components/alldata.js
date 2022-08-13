@@ -1,5 +1,6 @@
 import React from "react";
 import { UserContext } from "./context";
+import Card from "./context";
 
 function AllData() {
   const ctx = React.useContext(UserContext);
@@ -16,19 +17,24 @@ function AllData() {
   });
 
   return (
-    <div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Balance</th>
-          </tr>
-        </thead>
-        <tbody>{displayUsers}</tbody>
-      </table>
-    </div>
+    <Card
+      bgcolor="white"
+      txtcolor="text-dark"
+      header="All User Data"
+      body={
+        <table className="table table-sm table-striped ">
+          <thead className="thead-light">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody>{displayUsers}</tbody>
+        </table>
+      }
+    />
   );
 }
 

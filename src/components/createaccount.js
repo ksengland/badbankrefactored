@@ -14,8 +14,21 @@ function CreateAccount() {
 
   function validate(field, label) {
     if (!field) {
-      setStatus("Error: invalid ${label}");
-      setTimeout(() => setStatus(""), 3000);
+      setStatus(
+        `Your account could not be created, due to missing ${label}. Please try again.`
+      );
+      setTimeout(() => setStatus(""), 4000);
+      return false;
+    }
+    return true;
+  }
+
+  function validPassword(password) {
+    if (password.length < 8) {
+      setStatus(
+        `Password is too short. Password must be at least 8 characters long. Please try again.`
+      );
+      setTimeout(() => setStatus(""), 2000);
       return false;
     }
     return true;
@@ -25,7 +38,7 @@ function CreateAccount() {
     console.log(name, email, password);
     if (!validate(name, "name")) return;
     if (!validate(email, "email")) return;
-    if (!validate(password, "password")) return;
+    if (!validPassword(password, "password")) return;
     ctx.users.push({ name, email, password, balance: 100 });
     console.log(ctx);
     setShow(false);
@@ -40,7 +53,8 @@ function CreateAccount() {
 
   return (
     <Card
-      bgcolor="primary"
+      bgcolor="light"
+      txtcolor="dark"
       header="Create Account"
       status={status}
       body={
@@ -77,7 +91,8 @@ function CreateAccount() {
             <br />
             <button
               type="submit"
-              className="btn btn-light"
+              className="btn btn-outline-dark"
+              disabled={name === "" || email === "" || password === ""}
               onClick={handleCreate}
             >
               Create Account
@@ -86,7 +101,7 @@ function CreateAccount() {
         ) : (
           <>
             <h5>Success</h5>
-            <button type="submit" className="btn btn-light" onClick={clearForm}>
+            <button type="submit" className="btn btn-dark" onClick={clearForm}>
               Create another account
             </button>
           </>

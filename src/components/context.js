@@ -9,7 +9,7 @@ function Card(props) {
     return "card mb-3 " + bg + txt;
   }
   return (
-    <div className={classes()} style={{ maxWidth: "18rem" }}>
+    <div className={classes()} style={{ minWidth: "20rem", maxWidth: "26rem" }}>
       <div className="card-header">{props.header}</div>
       <div className="card-body">
         {props.title && <h5 className="card-title">{props.title}</h5>}
