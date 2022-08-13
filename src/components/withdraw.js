@@ -59,7 +59,7 @@ function Withdraw() {
         show ? (
           <>
             <h2>Welcome, {userName}!</h2>
-            <h3>Current Balance: $ {userBalance}</h3>
+            <h4>Current Balance: $ {userBalance}</h4>
             <br />
             <br />
             Amount

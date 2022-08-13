@@ -73,7 +73,7 @@ function Deposit() {
         ) : (
           <>
             <h5>Success!</h5>
-            <button type="submit" className="btn btn--dark" onClick={clearForm}>
+            <button type="submit" className="btn btn-dark" onClick={clearForm}>
               Make Another Deposit
             </button>
           </>

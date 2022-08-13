@@ -92,7 +92,7 @@ function CreateAccount() {
             <button
               type="submit"
               className="btn btn-outline-dark"
-              disabled={name === "" || email === "" || password === ""}
+              disabled={name === "" && email === "" && password === ""}
               onClick={handleCreate}
             >
               Create Account
@@ -100,7 +100,7 @@ function CreateAccount() {
           </>
         ) : (
           <>
-            <h5>Success</h5>
+            <h5>Success! Your account was created.</h5>
             <button type="submit" className="btn btn-dark" onClick={clearForm}>
               Create another account
             </button>
