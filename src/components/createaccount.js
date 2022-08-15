@@ -70,6 +70,7 @@ function CreateAccount() {
               value={name}
               onChange={(e) => setName(e.currentTarget.value)}
             />
+            <br />
             Email
             <br />
             <input
@@ -80,6 +81,7 @@ function CreateAccount() {
               value={email}
               onChange={(e) => setEmail(e.currentTarget.value)}
             />
+            <br />
             Password
             <br />
             <input
@@ -90,6 +92,7 @@ function CreateAccount() {
               value={password}
               onChange={(e) => setPassword(e.currentTarget.value)}
             />
+            <br />
             <br />
             <button
               type="submit"
